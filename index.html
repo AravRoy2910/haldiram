@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Haldiram's – Taste of India</title>
+
+  <style>
+    :root {
+      --red: #c4161c;
+      --gold: #f6c453;
+      --dark: #0f0f0f;
+      --light: #ffffff;
+      --muted: #666;
+      --glass: rgba(255, 255, 255, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", system-ui, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fff8f0, #fff);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ---------------- NAVBAR ---------------- */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 18px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.6);
+      z-index: 1000;
+    }
+
+    header h1 {
+      color: var(--red);
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--red);
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ---------------- HERO ---------------- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 80px;
+      gap: 60px;
+    }
+
+    .hero-text {
+      max-width: 550px;
+      animation: fadeUp 1s ease;
+    }
+
+    .hero-text h2 {
+      font-size: 56px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero-text span {
+      color: var(--red);
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero-text button {
+      padding: 14px 36px;
+      border-radius: 30px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--red), #ff3c3c);
+      color: white;
+      box-shadow: 0 15px 40px rgba(196, 22, 28, 0.3);
+      transition: 0.3s;
+    }
+
+    .hero-text button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 25px 50px rgba(196, 22, 28, 0.4);
+    }
+
+    .hero-image {
+      flex: 1;
+      position: relative;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 520px;
+      filter: drop-shadow(0 30px 60px rgba(0,0,0,0.25));
+    }
+    /* -------- ABOUT SECTION -------- */
+    .about {
+    background: linear-gradient(135deg, #fff, #fff6eb);
+    }
+
+    .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+    }
+
+    .about h3 {
+    font-size: 44px;
+    margin-bottom: 20px;
+    }
+
+    .about p {
+    color: #555;
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    }
+
+    .about-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    }
+
+    .stat {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+    }
+
+    .stat h4 {
+    font-size: 32px;
+    color: var(--red);
+    }
+
+    .stat span {
+    font-size: 14px;
+    color: #777;
+    }
+
+    
+
+    /* -------- RESPONSIVE -------- */
+    @media (max-width: 900px) {
+    .about-grid,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    }
+
+
+    /* ---------------- PRODUCTS ---------------- */
+    section {
+      padding: 100px 80px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h3 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 22px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+      transition: 0.4s;
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+    }
+
+    .card img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    .card h4 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ---------------- CTA ---------------- */
+    .cta {
+      background: linear-gradient(135deg, var(--red), #ff4d4d);
+      color: white;
+      text-align: center;
+      padding: 90px 20px;
+      border-radius: 40px;
+      margin: 100px 80px;
+    }
+
+    .cta h3 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .cta button {
+      margin-top: 20px;
+      padding: 14px 40px;
+      border-radius: 30px;
+      border: none;
+      font-size: 16px;
+      background: white;
+      color: var(--red);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* -------- CONTACT SECTION -------- */
+    .contact {
+    background: #0f0f0f;
+    color: white;
+    }
+
+    .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    }
+
+    .contact h3 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    }
+
+    .contact p {
+    color: #ccc;
+    margin-bottom: 15px;
+    }
+
+    .contact-info div {
+    margin-bottom: 15px;
+    font-size: 16px;
+    }
+
+    .contact-info strong {
+    color: var(--gold);
+    }
+
+    form {
+    background: rgba(255,255,255,0.05);
+    padding: 40px;
+    border-radius: 25px;
+    }
+
+    form input,
+    form textarea {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    }
+
+    form textarea {
+    resize: none;
+    height: 120px;
+    }
+
+    form button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    background: linear-gradient(135deg, var(--gold), #ffd977);
+    color: black;
+    cursor: pointer;
+    font-weight: 600;
+    }
+
+    /* ---------------- FOOTER ---------------- */
+    footer {
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ---------------- ANIMATIONS ---------------- */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* ---------------- RESPONSIVE ---------------- */
+    @media (max-width: 900px) {
+      header {
+        padding: 18px 30px;
+      }
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 120px;
+      }
+      section {
+        padding: 80px 30px;
+      }
+      .cta {
+        margin: 80px 30px;
+      }
+
+    }
+    /* ====== MOBILE FIRST IMPROVEMENTS ====== */
+    @media (max-width: 600px) {
+
+    header {
+        padding: 14px 20px;
+    }
+
+    nav {
+        display: none; /* simple clean mobile look */
+    }
+
+    .hero {
+        padding: 100px 20px 40px;
+        gap: 30px;
+    }
+
+    .hero-text h2 {
+        font-size: 36px;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+    }
+
+    .hero-image img {
+        max-width: 320px;
+    }
+
+    section {
+        padding: 70px 20px;
+    }
+
+    .section-title h3 {
+        font-size: 32px;
+    }
+
+    /* ABOUT */
+    .about h3 {
+        font-size: 34px;
+    }
+
+    .about-stats {
+        flex-direction: column;
+    }
+
+    .stat h4 {
+        font-size: 26px;
+    }
+
+    /* CONTACT */
+    .contact h3 {
+        font-size: 32px;
+    }
+
+    form {
+        padding: 25px;
+    }
+
+    form button {
+        font-size: 15px;
+    }
+
+    /* CTA */
+    .cta {
+        margin: 60px 20px;
+        padding: 60px 20px;
+    }
+
+    .cta h3 {
+        font-size: 30px;
+    }
+    }
+
+    /* ====== LARGE SCREENS ====== */
+    @media (min-width: 1400px) {
+    .hero {
+        max-width: 1400px;
+        margin: auto;
+    }
+
+    section {
+        max-width: 1400px;
+        margin: auto;
+    }
+    }
+    .menu-btn {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    }
+
+    /* MOBILE NAV */
+    @media (max-width: 768px) {
+    .menu-btn {
+        display: block;
+    }
+
+    nav {
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        background: white;
+        padding: 20px 30px;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        display: none;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    nav.active {
+        display: flex;
+    }
+    }
+    @media (max-width: 768px) {
+        .contact {
+            padding: 70px 20px;
+        }
+
+        .contact-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .contact-info {
+            text-align: center;
+        }
+
+        .contact-info div {
+            font-size: 15px;
+        }
+
+        form {
+            width: 100%;
+            padding: 25px;
+        }
+
+        form input,
+        form textarea {
+            font-size: 15px;
+        }
+        }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header>
+    <h1>Haldiram's</h1>
+
+    <div class="menu-btn" id="menuBtn">☰</div>
+
+    <nav id="navMenu">
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    </header>
+
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <h2>India’s <span>Favourite</span><br/>Taste Since 1937</h2>
+      <p>
+        From crispy namkeens to mouth-watering sweets, Haldiram’s brings
+        tradition, purity, and unforgettable taste to every bite.
+      </p>
+      <button>Explore Products</button>
+    </div>
+
+    <div class="hero-image">
+      <img src="herojpg.jpg" alt="Haldiram Snacks">
+    </div>
+  </div>
+
+  <section class="about" id="about">
+    <div class="about-grid">
+        
+        <div>
+        <h3>About Haldiram’s</h3>
+        <p>
+            Founded in 1937, Haldiram’s began as a small shop in Bikaner and grew
+            into one of India’s most trusted and loved food brands. What started
+            with a single namkeen recipe has now become a symbol of quality,
+            authenticity, and tradition.
+        </p>
+        <p>
+            Every Haldiram’s product is crafted with the finest ingredients,
+            state-of-the-art technology, and strict hygiene standards — ensuring
+            that every bite delivers the same taste generations have trusted.
+        </p>
+
+        <div class="about-stats">
+            <div class="stat">
+            <h4>85+</h4>
+            <span>Years of Legacy</span>
+            </div>
+            <div class="stat">
+            <h4>100+</h4>
+            <span>Countries Served</span>
+            </div>
+            <div class="stat">
+            <h4>500+</h4>
+            <span>Products</span>
+            </div>
+        </div>
+        </div>
+
+        <img src="herojpg.jpg" style="width:100%; border-radius:30px;">
+    
+    </div>
+    </section>
+
+  <!-- PRODUCTS -->
+    <section id="products">
+        <div class="section-title">
+        <h3>Our Bestsellers</h3>
+        <p>Crafted with love & authentic Indian flavors</p>
+        </div>
+
+        <div class="products">
+        <div class="card">
+            <img src="img.jpg">
+            <h4>Bhujia Sev</h4>
+            <p>Crispy, spicy and iconic taste of India.</p>
+        </div>
+
+        <div class="card">
+            <img src="jamun.jpg">
+            <h4>Gulab Jamun</h4>
+            <p>Soft, juicy & timeless sweetness.</p>
+        </div>
+
+        <div class="card">
+            <img src="jamun.jpg">
+            <h4>Rasgulla</h4>
+            <p>Delicate, spongy & heavenly.</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta">
+        <h3>Experience the Taste of Tradition</h3>
+        <p>Order online or visit your nearest Haldiram’s outlet today</p>
+        <button>Order Now</button>
+    </div>
+
+    <section class="contact" id="contact">
+    <div class="contact-grid">
+
+        <div class="contact-info">
+        <h3>Contact Us</h3>
+        <p>
+            We'd love to hear from you. Whether it's feedback, franchise
+            enquiries, or business opportunities — reach out anytime.
+        </p>
+
+        <div><strong>📍 Address:</strong> Haldiram Bhawan, Bikaner, Rajasthan</div>
+        <div><strong>📞 Phone:</strong> +91 1800 123 456</div>
+        <div><strong>✉️ Email:</strong> support@haldirams.com</div>
+        <div><strong>🕒 Hours:</strong> Mon – Sat | 9:00 AM – 7:00 PM</div>
+        </div>
+
+        <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message"></textarea>
+        <button>Send Message</button>
+        </form>
+
+    </div>
+    </section>
+
+
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 Haldiram’s. Designed for educational & demo purposes.
+  </footer>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        document.querySelector(link.getAttribute("href"))
+          .scrollIntoView({ behavior: "smooth" });
+      });
+      
+    });
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
+
+    menuBtn.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+    });
+
+    // Close menu when link clicked
+    document.querySelectorAll("#navMenu a").forEach(link => {
+    link.addEventListener("click", () => {
+        navMenu.classList.remove("active");
+    });
+    });
+
+  </script>
+
+</body>
+</html>
